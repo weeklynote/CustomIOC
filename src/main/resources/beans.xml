@@ -1,0 +1,16 @@
+<beans>
+    <component-scan base-package="com.mar" />
+    <bean id="accountService" class="com.mar.impl.AccountServiceImpl" >
+        <property name="AccountDao" ref="accountDao" />
+    </bean>
+    <bean id="accountDao" class="com.mar.dao.AccountDaoImpl" >
+        <property name="ConnectionUtils" ref="connectionUtils" />
+    </bean>
+    <bean id="connectionUtils" class="com.mar.utils.ConnectionUtils" />
+    <bean id="transactionManager" class="com.mar.utils.TransactionManager" >
+        <property name="ConnectionUtils" ref="connectionUtils" />
+    </bean>
+    <bean id="proxyFactory" class="com.mar.factory.ProxyFactory">
+        <property name="TransactionManager" ref="transactionManager"/>
+    </bean>
+</beans>
